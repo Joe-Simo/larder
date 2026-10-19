@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0d1210;
+  --panel: #141b17;
+  --panel-2: #1a231e;
+  --line: #24302a;
+  --ink: #eef3ee;
+  --mute: #93a69a;
+  --ok: #7fd49b;
+  --warn: #f2c46b;
+  --bad: #f08a7e;
+  --ring: #5cc8ff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html { color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); }
+::selection { background: #2c4a3a; }
+
+@keyframes listen { 0%, 100% { opacity: .55; transform: scaleX(.9); } 50% { opacity: 1; transform: scaleX(1); } }
+@keyframes think { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+.ring-idle { background: #22302a; }
+.ring-listen { background: var(--ring); animation: listen 1.1s ease-in-out infinite; box-shadow: 0 0 18px 2px #5cc8ff66; }
+.ring-think { background: linear-gradient(90deg, #1d6fa3, #5cc8ff, #1d6fa3, #5cc8ff); background-size: 200% 100%; animation: think 1.2s linear infinite; box-shadow: 0 0 14px 1px #5cc8ff44; }
+.ring-speak { background: #5cc8ff; box-shadow: 0 0 22px 3px #5cc8ff77; }
+@media (prefers-reduced-motion: reduce) { .ring-listen, .ring-think { animation: none; } }
