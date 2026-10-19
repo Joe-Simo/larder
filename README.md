@@ -4,8 +4,8 @@
 
 Built for the Alexa+ track of the Amazon Developer Hackathon "Build, Ship, Shape" (2026). Not made by or affiliated with Amazon.
 
-- **Live demo (simulated Alexa+ in the browser):** LIVE_URL
-- **MCP endpoint:** `LIVE_URL/api/mcp` (Streamable HTTP, MCP 2025-11-25; the 2026-07-28 revision is also served)
+- **Live demo (simulated Alexa+ in the browser):** <https://larder-pi-six.vercel.app>
+- **MCP endpoint:** `https://larder-pi-six.vercel.app/api/mcp` (Streamable HTTP, MCP 2025-11-25; the 2026-07-28 revision is also served)
 
 ## Why
 
@@ -48,10 +48,10 @@ Also: one prompt, `weekly_restock`, and server `instructions` that tell the assi
 Any MCP client that speaks Streamable HTTP works. The demo page shows a private URL for your browser's kitchen.
 
 ```json
-{ "mcpServers": { "larder": { "url": "LIVE_URL/api/mcp?household=my-kitchen" } } }
+{ "mcpServers": { "larder": { "url": "https://larder-pi-six.vercel.app/api/mcp?household=my-kitchen" } } }
 ```
 
-For stdio-only clients: `npx -y mcp-remote LIVE_URL/api/mcp`.
+For stdio-only clients: `npx -y mcp-remote https://larder-pi-six.vercel.app/api/mcp`.
 
 ## The simulated Alexa+
 

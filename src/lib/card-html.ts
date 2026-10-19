@@ -38,7 +38,7 @@ button.b.ghost{background:transparent;color:var(--ink);border:1px solid var(--li
 button.b:disabled{opacity:.5;cursor:default}
 .code{font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;background:#1d2a33;color:var(--accent);padding:3px 8px;border-radius:6px}
 .note{color:var(--mute);font-size:12px;margin-top:10px}
-.tl li{display:block}.tl .who{color:var(--accent)}.tl time{color:var(--mute);font-size:12px;display:block}
+ul.tl li{display:block}.tl .who{color:var(--accent);font-weight:600}.tl time{color:var(--mute);font-size:12px;display:block;margin-top:2px}
 .empty{color:var(--mute);padding:24px 0}
 </style></head>
 <body><main id="app" aria-live="polite"><p class="empty">Waiting for Larder...</p></main>
@@ -95,11 +95,11 @@ button.b:disabled{opacity:.5;cursor:default}
     },
     cart:function(d){
       var c=d.cart||[]; if(!c.length)return "<h1>Cart</h1><p class='sub'>"+esc(d.speech)+"</p>";
-      return "<h1>Cart</h1><p class='sub'>"+esc(d.speech)+"</p><ul class='list'>"+c.map(function(l){return "<li><span>"+esc(l.name)+(l.qty?" x"+l.qty:"")+"</span><span class='amt'>"+esc(l.note||"")+"</span></li>"}).join("")+"</ul><div class='btns'><button class='b' data-tool='order_place' data-args='{}'>Review order</button></div>";
+      return "<h1>Cart</h1><p class='sub'>"+esc(d.speech)+"</p><ul class='list'>"+c.map(function(l){return "<li><span>"+esc(l.name)+(l.qty>1?" x"+l.qty:"")+"</span><span class='amt'>"+esc(l.note||"")+"</span></li>"}).join("")+"</ul><div class='btns'><button class='b' data-tool='order_place' data-args='{}'>Review order</button></div>";
     },
     order_review:function(d){
       if(!d.confirmation_code)return "<h1>Order</h1><p class='sub'>"+esc(d.speech)+"</p>";
-      return "<h1>Review your order</h1><p class='sub'>"+esc(d.speech)+"</p><ul class='list'>"+d.lines.map(function(l){return "<li><span>"+esc(l.name)+(l.qty?" x"+l.qty:"")+"</span><span class='amt'>"+esc(l.note||"")+"</span></li>"}).join("")+"</ul><div class='btns'><button class='b' data-tool='order_confirm' data-args='"+esc(JSON.stringify({confirmation_code:d.confirmation_code}))+"'>Place order</button></div><p class='note'>Confirmation <span class='code'>"+esc(d.confirmation_code)+"</span>. Simulated order: no store, no payment.</p>";
+      return "<h1>Review your order</h1><p class='sub'>"+esc(d.speech)+"</p><ul class='list'>"+d.lines.map(function(l){return "<li><span>"+esc(l.name)+(l.qty>1?" x"+l.qty:"")+"</span><span class='amt'>"+esc(l.note||"")+"</span></li>"}).join("")+"</ul><div class='btns'><button class='b' data-tool='order_confirm' data-args='"+esc(JSON.stringify({confirmation_code:d.confirmation_code}))+"'>Place order</button></div><p class='note'>Confirmation <span class='code'>"+esc(d.confirmation_code)+"</span>. Simulated order: no store, no payment.</p>";
     },
     order_placed:function(d){
       if(!d.ok)return "<h1>Not placed</h1><p class='sub'>"+esc(d.speech)+"</p>";
@@ -107,7 +107,7 @@ button.b:disabled{opacity:.5;cursor:default}
     },
     order_received:function(d){return "<h1>Restocked</h1><p class='sub'>"+esc(d.speech)+"</p><div class='chips'>"+(d.restocked||[]).map(function(n){return "<span class='chip'>"+esc(n)+"</span>"}).join("")+"</div>"},
     recap:function(d){
-      return "<h1>Kitchen activity</h1><p class='sub'>"+esc(d.speech)+"</p><ul class='list tl'>"+(d.activity||[]).map(function(a){return "<li>"+(a.who?"<span class='who'>"+esc(a.who)+"</span>: ":"")+esc(a.text)+"<time datetime='"+esc(a.at)+"'>"+esc(new Date(a.at).toLocaleString([], {weekday:"short",hour:"numeric",minute:"2-digit"}))+"</time></li>"}).join("")+"</ul>";
+      return "<h1>Kitchen activity</h1><p class='sub'>Newest first, from everyone in the household.</p><ul class='list tl'>"+(d.activity||[]).map(function(a){return "<li>"+(a.who?"<span class='who'>"+esc(a.who)+"</span> ":"")+esc(a.text)+"<time datetime='"+esc(a.at)+"'>"+esc(new Date(a.at).toLocaleString([], {weekday:"short",hour:"numeric",minute:"2-digit"}))+"</time></li>"}).join("")+"</ul>";
     }
   };
   function render(d){

@@ -413,7 +413,7 @@ export function receiveOrder(h: Household, who?: string) {
 
 export function recap(h: Household, limit = 6) {
   const items = h.activity.slice(0, Math.min(Math.max(limit, 1), 20));
-  const spoken = items.slice(0, 4).map((a) => `${a.who ? `${a.who}: ` : ""}${a.text.charAt(0).toLowerCase()}${a.text.slice(1)}`);
+  const spoken = items.slice(0, 3).map((a) => `${a.who ? `${a.who}: ` : ""}${a.text.charAt(0).toLowerCase()}${a.text.slice(1)}`);
   const speech = items.length ? `Here's what changed in the kitchen. ${cap(spoken.join(". "))}.` : "Nothing has changed in the kitchen yet.";
   return { kind: "recap" as const, speech, activity: items, pending: h.pending ? { code: h.pending.code, items: h.pending.lines.length } : null, cartCount: h.cart.length };
 }
