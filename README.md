@@ -9,7 +9,7 @@ Built for the Alexa+ track of the Amazon Developer Hackathon "Build, Ship, Shape
 
 ## Why
 
-Alexa's shopping list is a flat list. It does not know what is already in the kitchen, what a recipe needs, or the gap between the two. The kitchen is where hands are busy and a voice assistant already sits, so it is the place people will say "we just used the last of the milk" out loud but will not open an app to log it. Larder keeps that memory for the whole household, across conversations.
+A shopping list is a flat list. It does not know what is already in the kitchen, what a recipe needs, or the gap between the two. The kitchen is where hands are busy and a voice assistant already sits, so it is the place people will say "we just used the last of the milk" out loud but will not open an app to log it. Larder keeps that memory for the whole household, across conversations.
 
 ## What it does
 
@@ -55,7 +55,7 @@ For stdio-only clients: `npx -y mcp-remote https://larder-pi-six.vercel.app/api/
 
 ## The simulated Alexa+
 
-The demo page stands in for Alexa+, because Alexa+ itself is not available to outside developers to test against:
+The hackathon rules allow a simulated Alexa+ experience, so the demo page stands in for Alexa+ and anyone can try Larder in a browser:
 
 - Speak (Chrome's Web Speech API) or type. Replies are spoken by your browser's speech synthesis.
 - An open model on OpenRouter plans each utterance into Larder tool calls, reading the live `tools/list`. The page then calls Larder through the official MCP TypeScript client over Streamable HTTP, exactly as any MCP host would, and renders the MCP Apps card in an Echo Show style frame.
